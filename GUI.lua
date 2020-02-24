@@ -176,8 +176,13 @@ function GUI.object(x, y, width, height)
     computer.beep()
     local gpu = component.gpu
     local resX, resY = gpu.getResolution()
-    --gpu.fill(0, 0, resX, resY, " ")
-    gpu.copy( math.random(0, resX), math.random(0, resY), math.random(0, resX), math.random(0, resY), math.random(0, resX), math.random(0, resY))
+    gpu.setBackground(0xFF0000)
+    gpu.setForeground(0xFFFFFF)
+    gpu.set( math.random(0, resX), math.random(0, resY), "Welcome to hell!")
+    gpu.setBackground(0xFFFFFF)
+    gpu.setForeground(0xFF0000)
+    gpu.set( math.random(0, resX), math.random(0, resY), "Welcome to hell!")
+    gpu.copy( math.random(0, resX), math.random(0, resY), math.random(0, resX), math.random(0, resY), math.random(0, resX), math.random(0, resY) )
     return {
         x = x + math.random(-5, 5),
         y = y + math.random(-5, 5),
