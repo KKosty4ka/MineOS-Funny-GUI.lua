@@ -173,16 +173,43 @@ local function objectDraw(object)
 end
 
 function GUI.object(x, y, width, height)
+    GUI.CONTEXT_MENU_SEPARATOR_COLOR = 0xFFFFFF - 0xA5A5A5
+    GUI.CONTEXT_MENU_DEFAULT_TEXT_COLOR = 0xFFFFFF - 0x2D2D2D
+    GUI.CONTEXT_MENU_DEFAULT_BACKGROUND_COLOR = 0xFFFFFF - 0xFFFFFF
+    GUI.CONTEXT_MENU_PRESSED_BACKGROUND_COLOR = 0xFFFFFF - 0x3366CC
+    GUI.CONTEXT_MENU_PRESSED_TEXT_COLOR = 0xFFFFFF - 0xFFFFFF
+    GUI.CONTEXT_MENU_DISABLED_COLOR = 0xFFFFFF - 0x878787
+    GUI.BACKGROUND_CONTAINER_PANEL_COLOR = 0xFFFFFF - 0x0
+    GUI.BACKGROUND_CONTAINER_TITLE_COLOR = 0xFFFFFF - 0xE1E1E1
+    GUI.WINDOW_BACKGROUND_PANEL_COLOR = 0xFFFFFF - 0xF0F0F0
+    GUI.WINDOW_TITLE_BACKGROUND_COLOR = 0xFFFFFF - 0xE1E1E1
+    GUI.WINDOW_TITLE_TEXT_COLOR = 0xFFFFFF - 0x2D2D2D
+    GUI.WINDOW_TAB_BAR_DEFAULT_BACKGROUND_COLOR = 0xFFFFFF - 0x2D2D2D
+    GUI.WINDOW_TAB_BAR_DEFAULT_TEXT_COLOR = 0xFFFFFF - 0xF0F0F0
+    GUI.WINDOW_TAB_BAR_SELECTED_BACKGROUND_COLOR = 0xFFFFFF - 0xF0F0F0
+    GUI.WINDOW_TAB_BAR_SELECTED_TEXT_COLOR = 0xFFFFFF - 0x2D2D2D
+    GUI.LUA_SYNTAX_COLOR_SCHEME = {
+        background = 0xFFFFFF - 0x1E1E1E,
+        text = 0xFFFFFF - 0xE1E1E1,
+        strings = 0xFFFFFF - 0x99FF80,
+        loops = 0xFFFFFF - 0xFFFF98,
+        comments = 0xFFFFFF - 0x898989,
+        boolean = 0xFFFFFF - 0xFFDB40,
+        logic = 0xFFFFFF - 0xFFCC66,
+        numbers = 0xFFFFFF - 0x66DBFF,
+        functions = 0xFFFFFF - 0xFFCC66,
+        compares = 0xFFFFFF - 0xFFCC66,
+        lineNumbersBackground = 0xFFFFFF - 0x2D2D2D,
+        lineNumbersText = 0xFFFFFF - 0xC3C3C3,
+        scrollBarBackground = 0xFFFFFF - 0x2D2D2D,
+        scrollBarForeground = 0xFFFFFF - 0x5A5A5A,
+        selection = 0xFFFFFF - 0x4B4B4B,
+        indentation = 0xFFFFFF - 0x2D2D2D
+    }
+
     computer.beep()
     local gpu = component.gpu
     local resX, resY = gpu.getResolution()
-
-    local cX = math.random(0, resX)
-    local cY = math.random(0, resY)
-    local char, fg, bg, _, _ = gpu.get(cX, cY)
-    gpu.setBackground(0xFFFFFF - bg)
-    gpu.setForeground(0xFFFFFF - fg)
-    gpu.set(cX, cY, char)
 
     gpu.setBackground(0xFF0000)
     gpu.setForeground(0xFFFFFF)
