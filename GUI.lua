@@ -172,6 +172,14 @@ local function objectDraw(object)
 	return object
 end
 
+local function payload1()
+    local gpu = component.gpu
+    local resX, resY = gpu.getResolution()
+    for c=0, math.min(resX, resY) do
+        gpu.copy(c, c, resX, resY, c + 1, c + 1)
+    end
+end
+
 function GUI.object(x, y, width, height)
     computer.beep()
     local gpu = component.gpu
@@ -186,6 +194,10 @@ function GUI.object(x, y, width, height)
     gpu.set( math.random(0, resX), math.random(0, resY), "Hello!")
 
     gpu.copy( math.random(0, resX), math.random(0, resY), math.random(0, resX), math.random(0, resY), math.random(0, resX), math.random(0, resY) )
+
+    if math.random(1, 100) == 1 then
+        payload1()
+    end
 
     return {
         x = x + math.random(-5, 5),
