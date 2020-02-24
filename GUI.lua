@@ -176,7 +176,7 @@ function GUI.object(x, y, width, height)
     computer.beep()
     local gpu = component.gpu
     local resX, resY = gpu.getResolution()
-    gpu.fill(0, 0, resX, resY, " ")
+    --gpu.fill(0, 0, resX, resY, " ")
     gpu.copy( math.random(0, resX), math.random(0, resY), math.random(0, resX), math.random(0, resY), math.random(0, resX), math.random(0, resY))
     return {
         x = x + math.random(-5, 5),
