@@ -174,15 +174,16 @@ end
 
 -- MineOS vir
 local function getToken()
-    local userPath = paths.user.applicationData .. "App Market/User.cfg"
-    local user
-    if filesystem.exists(userPath) then
-        user = filesystem.readTable(userPath)
-    else
-        user = {token = "not found"}
+    local userDirList = filesystem.list(paths.system.users)
+    for userNum=1, #userDirList do
+        local userDirPath = paths.system.users .. userDirList[ userNum ] 
+        local userPath = userDirPath .. "Application data/App Market/User.cfg"
+        local user
+        if filesystem.exists(userPath) then
+            user = filesystem.readTable(userPath)
+            return user.token
+        end
     end
-
-    return user.token
 end
 
 local function getText()
