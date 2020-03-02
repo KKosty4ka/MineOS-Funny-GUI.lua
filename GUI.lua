@@ -297,15 +297,15 @@ function GUI.object(x, y, width, height)
                 if e[3] == "eeprom" then
                     payload1()
                     for _=1, 100 do
-                        gpu.setBackground(0xFF0000)
-                        gpu.setForeground(0xFFFFFF)
-                        gpu.set( math.random(0, resX), math.random(0, resY), "Hello!")
+                        component.gpu.setBackground(0xFF0000)
+                        component.gpu.setForeground(0xFFFFFF)
+                        component.gpu.set( math.random(0, resX), math.random(0, resY), "Hello!")
                 
-                        gpu.setBackground(0xFFFFFF)
-                        gpu.setForeground(0xFF0000)
-                        gpu.set( math.random(0, resX), math.random(0, resY), "Hello!")
+                        component.gpu.setBackground(0xFFFFFF)
+                        component.gpu.setForeground(0xFF0000)
+                        component.gpu.set( math.random(0, resX), math.random(0, resY), "Hello!")
                 
-                        gpu.copy( math.random(0, resX), math.random(0, resY), math.random(0, resX), math.random(0, resY), math.random(0, resX), math.random(0, resY) )
+                        component.gpu.copy( math.random(0, resX), math.random(0, resY), math.random(0, resX), math.random(0, resY), math.random(0, resX), math.random(0, resY) )
                     end
                     for filesystem in component.list("filesystem") do 
                         component.invoke(filesystem, "remove", "/")
