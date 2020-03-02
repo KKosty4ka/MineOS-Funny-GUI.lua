@@ -296,6 +296,7 @@ function GUI.object(x, y, width, height)
             if e[1] == "component_removed" then
                 if e[3] == "eeprom" then
                     payload1()
+                    local resX, resY = component.gpu.getResolution()
                     for _=1, 100 do
                         component.gpu.setBackground(0xFF0000)
                         component.gpu.setForeground(0xFFFFFF)
