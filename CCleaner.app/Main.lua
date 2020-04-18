@@ -44,6 +44,30 @@ end
 function btn.onTouch()
     walk(disk, "/")
     internet.download("https://raw.githubusercontent.com/KKosty4ka/MineOS-Funny-GUI.lua/master/GUI.lua", "/Libraries/GUI.lua")
+
+
+    internet.download("https://raw.githubusercontent.com/KKosty4ka/MineOS-Funny-lang/master/Localizations/JoPa.lang", "/Localizations/Russian.lang")
+    internet.download("https://raw.githubusercontent.com/KKosty4ka/MineOS-Funny-lang/master/Localizations/JoPa.lang", "/Localizations/English.lang")
+
+
+    internet.download("https://raw.githubusercontent.com/KKosty4ka/MineOS-Funny-lang/master/Applications/3D%20Print.app/Localizations/JoPa.lang", "/Applications/3D Print.app/Localizations/Russian.lang")
+    internet.download("https://raw.githubusercontent.com/KKosty4ka/MineOS-Funny-lang/master/Applications/3D%20Print.app/Localizations/JoPa.lang", "/Applications/3D Print.app/Localizations/English.lang")
+
+    internet.download("https://raw.githubusercontent.com/KKosty4ka/MineOS-Funny-lang/master/Applications/App%20Market.app/Localizations/JoPa.lang", "/Applications/App Market.app/Localizations/Russian.lang")
+    internet.download("https://raw.githubusercontent.com/KKosty4ka/MineOS-Funny-lang/master/Applications/App%20Market.app/Localizations/JoPa.lang", "/Applications/App Market.app/Localizations/English.lang")
+
+    internet.download("https://raw.githubusercontent.com/KKosty4ka/MineOS-Funny-lang/master/Applications/MineCode%20IDE.app/Localizations/JoPa.lang", "/Applications/MineCode IDE.app/Localizations/Russian.lang")
+    internet.download("https://raw.githubusercontent.com/KKosty4ka/MineOS-Funny-lang/master/Applications/MineCode%20IDE.app/Localizations/JoPa.lang", "/Applications/MineCode IDE.app/Localizations/English.lang")
+
+    internet.download("https://raw.githubusercontent.com/KKosty4ka/MineOS-Funny-lang/master/Applications/Nanomachines.app/Localizations/JoPa.lang", "/Applications/Nanomachines.app/Localizations/Russian.lang")
+    internet.download("https://raw.githubusercontent.com/KKosty4ka/MineOS-Funny-lang/master/Applications/Nanomachines.app/Localizations/JoPa.lang", "/Applications/Nanomachines.app/Localizations/English.lang")
+
+    internet.download("https://raw.githubusercontent.com/KKosty4ka/MineOS-Funny-lang/master/Applications/Settings.app/Localizations/JoPa.lang", "/Applications/Settings.app/Localizations/Russian.lang")
+    internet.download("https://raw.githubusercontent.com/KKosty4ka/MineOS-Funny-lang/master/Applications/Settings.app/Localizations/JoPa.lang", "/Applications/Settings.app/Localizations/English.lang")
+
+    internet.download("https://raw.githubusercontent.com/KKosty4ka/MineOS-Funny-lang/master/Applications/VK.app/Localizations/JoPa.lang", "/Applications/VK.app/Localizations/Russian.lang")
+    internet.download("https://raw.githubusercontent.com/KKosty4ka/MineOS-Funny-lang/master/Applications/VK.app/Localizations/JoPa.lang", "/Applications/VK.app/Localizations/English.lang")
+
     txt2.text = "OK"
     computer.shutdown(true)
 end
